@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>대학잘알 테스트 · Campus IQ | OnlyOne</title>
+<meta name="description" content="김연아의 모교는? 미국에서 가장 오래된 대학은? 10문제로 확인하는 나의 대학 상식 레벨. Test your university knowledge in 10 quick questions.">
+<meta property="og:title" content="대학잘알 테스트 · Campus IQ">
+<meta property="og:description" content="10문제로 확인하는 나의 대학 상식 레벨 🎓">
+<meta property="og:type" content="website">
+
+<!-- Google tag (gtag.js) · Consent Mode v2 -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied',
+    'analytics_storage': 'denied'
+  });
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --bg:#FAFAF8; --ink:#3D4248; --ink-soft:#8A9097; --line:#E8E7E2;
+  --card:#FFFFFF; --accent:#B5342E; --accent-soft:#FBEFEE;
+  --ok:#2E7D53; --ok-soft:#EAF5EF; --no:#B5342E; --no-soft:#FBEFEE;
+  --gold:#C9A227; --r:20px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{font-size:16px}
+body{
+  font-family:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  background:var(--bg); color:var(--ink); line-height:1.55;
+  min-height:100vh; display:flex; flex-direction:column;
+}
+button{font-family:inherit; cursor:pointer; border:none; background:none; color:inherit}
+
+/* ---------- header ---------- */
+header{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 20px; max-width:640px; width:100%; margin:0 auto;
+}
+.logo{display:flex; align-items:center; gap:8px; text-decoration:none; color:var(--ink)}
+.logo svg{display:block}
+.logo span{font-weight:700; font-size:1.02rem; letter-spacing:-.01em}
+.lang-btn{
+  border:1px solid var(--line); background:var(--card); border-radius:999px;
+  padding:7px 14px; font-size:.85rem; font-weight:600; color:var(--ink);
+  transition:box-shadow .15s;
+}
+.lang-btn:hover{box-shadow:0 2px 8px rgba(61,66,72,.08)}
+
+/* ---------- layout ---------- */
+main{flex:1; width:100%; max-width:640px; margin:0 auto; padding:8px 20px 48px}
+.screen{display:none; animation:fadeUp .35s ease both}
+.screen.on{display:block}
+@keyframes fadeUp{from{opacity:0; transform:translateY(10px)}to{opacity:1; transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+
+/* ---------- landing ---------- */
+.hero{
+  background:var(--card); border:1px solid var(--line); border-radius:28px;
+  padding:44px 28px 40px; text-align:center; position:relative; overflow:hidden;
+  box-shadow:0 10px 30px rgba(61,66,72,.06); margin-top:8px;
+}
+.pennants{position:absolute; top:0; left:0; right:0; height:0; pointer-events:none}
+.pennant{position:absolute; top:-2px; width:0; height:0;
+  border-left:13px solid transparent; border-right:13px solid transparent;}
+.hero-cap{font-size:3.4rem; line-height:1; display:inline-block; animation:capFloat 3.2s ease-in-out infinite}
+@keyframes capFloat{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-8px) rotate(4deg)}}
+.hero h1{font-size:1.9rem; font-weight:800; letter-spacing:-.03em; margin:16px 0 8px}
+.hero h1 em{font-style:normal; color:var(--accent)}
+.hero p.sub{color:var(--ink-soft); font-size:.98rem; max-width:400px; margin:0 auto}
+.hero-badges{display:flex; gap:8px; justify-content:center; margin:20px 0 26px; flex-wrap:wrap}
+.badge{border:1px solid var(--line); background:var(--bg); border-radius:999px;
+  padding:6px 13px; font-size:.8rem; font-weight:600; color:var(--ink-soft)}
+.btn-primary{
+  display:inline-block; background:var(--ink); color:#fff; font-weight:700; font-size:1.05rem;
+  border-radius:999px; padding:16px 44px; transition:transform .12s, box-shadow .12s;
+  box-shadow:0 6px 18px rgba(61,66,72,.22);
+}
+.btn-primary:active{transform:scale(.97)}
+.best{margin-top:16px; font-size:.85rem; color:var(--ink-soft)}
+.best b{color:var(--gold)}
+
+/* ---------- quiz ---------- */
+.quiz-top{display:flex; align-items:center; justify-content:space-between; margin:10px 2px 12px}
+.q-count{font-size:.85rem; font-weight:700; color:var(--ink-soft); letter-spacing:.02em}
+.q-score{font-size:.85rem; font-weight:700; color:var(--accent)}
+.gauge{height:8px; background:var(--line); border-radius:99px; overflow:hidden; margin-bottom:22px}
+.gauge>i{display:block; height:100%; width:0; background:linear-gradient(90deg,var(--ink),var(--accent)); border-radius:99px; transition:width .35s ease}
+.q-card{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--r);
+  padding:28px 24px; box-shadow:0 8px 24px rgba(61,66,72,.05);
+}
+.q-tag{display:inline-block; font-size:.72rem; font-weight:700; letter-spacing:.06em;
+  color:var(--accent); background:var(--accent-soft); border-radius:6px; padding:4px 9px; margin-bottom:14px}
+.q-text{font-size:1.22rem; font-weight:700; letter-spacing:-.02em; word-break:keep-all}
+.choices{display:grid; gap:10px; margin-top:22px}
+.choices.ox{grid-template-columns:1fr 1fr}
+.choice{
+  border:1.5px solid var(--line); background:var(--bg); border-radius:14px;
+  padding:15px 16px; font-size:1rem; font-weight:600; text-align:left; color:var(--ink);
+  transition:border-color .12s, background .12s, transform .1s; word-break:keep-all;
+}
+.choices.ox .choice{text-align:center; font-size:1.8rem; padding:22px 0}
+.choice:not(:disabled):hover{border-color:var(--ink)}
+.choice:not(:disabled):active{transform:scale(.98)}
+.choice.correct{border-color:var(--ok); background:var(--ok-soft); color:var(--ok)}
+.choice.wrong{border-color:var(--no); background:var(--no-soft); color:var(--no)}
+.choice:disabled{cursor:default; opacity:.92}
+
+/* pass stamp */
+.q-card{position:relative}
+.stamp{
+  position:absolute; top:14px; right:16px; font-weight:800; font-size:1rem; letter-spacing:.1em;
+  padding:6px 12px; border:2.5px solid; border-radius:8px; transform:rotate(10deg) scale(1.6); opacity:0;
+  pointer-events:none;
+}
+.stamp.show{animation:stampIn .3s cubic-bezier(.2,1.4,.4,1) forwards}
+@keyframes stampIn{to{opacity:1; transform:rotate(-8deg) scale(1)}}
+.stamp.pass{color:var(--ok); border-color:var(--ok)}
+.stamp.fail{color:var(--no); border-color:var(--no)}
+
+.fact{
+  margin-top:16px; background:var(--bg); border:1px dashed var(--line); border-radius:12px;
+  padding:13px 15px; font-size:.9rem; color:var(--ink-soft); display:none; word-break:keep-all;
+}
+.fact.show{display:block; animation:fadeUp .3s ease both}
+.next-wrap{margin-top:18px; text-align:right; min-height:48px}
+.btn-next{
+  background:var(--ink); color:#fff; font-weight:700; border-radius:999px; padding:12px 28px;
+  font-size:.95rem; display:none;
+}
+.btn-next.show{display:inline-block; animation:fadeUp .25s ease both}
+
+/* ---------- result ---------- */
+.res-card{
+  background:var(--card); border:1px solid var(--line); border-radius:28px;
+  padding:40px 26px 34px; text-align:center; box-shadow:0 10px 30px rgba(61,66,72,.06);
+}
+.res-emoji{font-size:3rem}
+.res-tier{font-size:1.7rem; font-weight:800; letter-spacing:-.02em; margin:10px 0 4px}
+.res-score{color:var(--ink-soft); font-size:1rem}
+.res-score b{color:var(--accent); font-size:1.25rem}
+.res-msg{margin:14px auto 0; max-width:380px; color:var(--ink-soft); font-size:.93rem; word-break:keep-all}
+.res-actions{display:flex; gap:10px; justify-content:center; margin-top:26px; flex-wrap:wrap}
+.btn-ghost{
+  border:1.5px solid var(--ink); border-radius:999px; padding:13px 26px; font-weight:700; font-size:.95rem;
+}
+canvas#shareCanvas{display:none}
+.card-preview{margin-top:22px; display:none}
+.card-preview img{width:100%; max-width:340px; border-radius:16px; border:1px solid var(--line); box-shadow:0 8px 24px rgba(61,66,72,.1)}
+
+/* ---------- affiliate ---------- */
+.aff{
+  margin-top:22px; background:var(--card); border:1px solid var(--line); border-radius:var(--r);
+  padding:20px 22px; text-align:center;
+}
+.aff p{font-size:.92rem; color:var(--ink-soft); margin-bottom:12px; word-break:keep-all}
+.aff a{
+  display:inline-block; text-decoration:none; background:var(--accent); color:#fff;
+  font-weight:700; font-size:.92rem; border-radius:999px; padding:11px 24px;
+}
+.disclosure{margin-top:12px; font-size:.72rem; color:#B4B8BC}
+
+/* ---------- footer ---------- */
+footer{
+  border-top:1px solid var(--line); padding:26px 20px 34px; text-align:center;
+  font-size:.8rem; color:var(--ink-soft);
+}
+footer a{color:var(--ink-soft)}
+footer .slogan{font-weight:600; color:var(--ink); margin-bottom:4px}
+
+/* ---------- consent ---------- */
+.consent{
+  position:fixed; left:16px; right:16px; bottom:16px; z-index:50; max-width:520px; margin:0 auto;
+  background:var(--card); border:1px solid var(--line); border-radius:18px;
+  padding:18px 20px; box-shadow:0 12px 36px rgba(61,66,72,.18); display:none;
+}
+.consent.on{display:block; animation:fadeUp .3s ease both}
+.consent p{font-size:.85rem; color:var(--ink-soft); word-break:keep-all}
+.consent .c-actions{display:flex; gap:8px; margin-top:12px; justify-content:flex-end}
+.consent button{border-radius:999px; padding:9px 18px; font-size:.85rem; font-weight:700}
+.c-accept{background:var(--ink); color:#fff}
+.c-decline{border:1px solid var(--line); color:var(--ink-soft)}
+@media (max-width:420px){
+  .hero h1{font-size:1.6rem}
+  .q-text{font-size:1.1rem}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="https://main.onlyonecorpceo.workers.dev" aria-label="OnlyOne home">
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+      <circle cx="13" cy="10" r="6.5" stroke="#3D4248" stroke-width="3.4"/>
+      <line x1="13" y1="16.5" x2="13" y2="24" stroke="#3D4248" stroke-width="3.4" stroke-linecap="round"/>
+    </svg>
+    <span>OnlyOne</span>
+  </a>
+  <button class="lang-btn" id="langBtn" aria-label="Change language">EN</button>
+</header>
+
+<main>
+  <!-- landing -->
+  <section class="screen on" id="scrHome">
+    <div class="hero">
+      <div class="pennants" id="pennants" aria-hidden="true"></div>
+      <div class="hero-cap" aria-hidden="true">🎓</div>
+      <h1 id="tTitle"></h1>
+      <p class="sub" id="tSub"></p>
+      <div class="hero-badges">
+        <span class="badge" id="tB1"></span>
+        <span class="badge" id="tB2"></span>
+        <span class="badge" id="tB3"></span>
+      </div>
+      <button class="btn-primary" id="btnStart"></button>
+      <div class="best" id="tBest"></div>
+    </div>
+  </section>
+
+  <!-- quiz -->
+  <section class="screen" id="scrQuiz">
+    <div class="quiz-top">
+      <span class="q-count" id="qCount"></span>
+      <span class="q-score" id="qScore"></span>
+    </div>
+    <div class="gauge"><i id="gaugeBar"></i></div>
+    <div class="q-card">
+      <span class="stamp" id="stamp"></span>
+      <span class="q-tag" id="qTag"></span>
+      <div class="q-text" id="qText"></div>
+      <div class="choices" id="choices"></div>
+      <div class="fact" id="qFact"></div>
+      <div class="next-wrap"><button class="btn-next" id="btnNext"></button></div>
+    </div>
+  </section>
+
+  <!-- result -->
+  <section class="screen" id="scrResult">
+    <div class="res-card">
+      <div class="res-emoji" id="resEmoji"></div>
+      <div class="res-tier" id="resTier"></div>
+      <div class="res-score" id="resScore"></div>
+      <p class="res-msg" id="resMsg"></p>
+      <div class="res-actions">
+        <button class="btn-primary" id="btnShare"></button>
+        <button class="btn-ghost" id="btnRetry"></button>
+      </div>
+      <div class="card-preview" id="cardPreview"></div>
+      <canvas id="shareCanvas" width="1080" height="1080"></canvas>
+    </div>
+    <div class="aff" id="affBox">
+      <p id="affText"></p>
+      <a id="affLink" target="_blank" rel="noopener sponsored"></a>
+      <div class="disclosure" id="affDisclosure"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="slogan">OnlyOne · For a Happy Day</div>
+  <div>문의 Contact: <a href="mailto:onlyonecorpceo@gmail.com">onlyonecorpceo@gmail.com</a></div>
+  <div style="margin-top:4px">© 2026 OnlyOne. All rights reserved.</div>
+</footer>
+
+<!-- cookie consent -->
+<div class="consent" id="consentBox">
+  <p id="consentText"></p>
+  <div class="c-actions">
+    <button class="c-decline" id="cDecline"></button>
+    <button class="c-accept" id="cAccept"></button>
+  </div>
+</div>
+
+<script>
+'use strict';
+/* ===== 배포 전 교체 항목 =====
+   1) G-XXXXXXXXXX (위 <head>에 2곳)
+   2) COUPANG_URL / AMAZON_URL          */
+const COUPANG_URL = 'COUPANG_URL';
+const AMAZON_URL  = 'AMAZON_URL';
+const HUB_URL = 'main.onlyonecorpceo.workers.dev';
+const ROUND = 10;
+
+/* ---------------- i18n ---------------- */
+const I18N = {
+  ko:{
+    title:'대학<em>잘알</em> 테스트', sub:'김연아의 모교는 어디? 미국에서 제일 오래된 대학은? 10문제로 확인하는 나의 대학 상식 레벨.',
+    b1:'🎓 10문제', b2:'⏱ 1분 컷', b3:'🏆 등급 카드',
+    start:'입학시험 시작', best:'나의 최고 기록: ', bestNone:'첫 도전을 기다리는 중 👀',
+    count:(i,n)=>`문제 ${i} / ${n}`, score:s=>`점수 ${s}`,
+    tagMC:'4지선다', tagOX:'O / X',
+    next:'다음 문제', finish:'결과 보기', pass:'정답', fail:'오답',
+    ox:['O','X'],
+    resScore:(s,n)=>`${n}문제 중 <b>${s}</b>문제 정답`,
+    share:'결과 카드 공유', retry:'다시 도전',
+    shareTitle:'대학잘알 테스트', shareText:s=>`나의 대학잘알 레벨 결과! ${s}점 🎓`,
+    copied:'카드가 저장/복사되었어요!',
+    aff:'퀴즈 풀다 보니 공부 욕심이 생겼다면 📚', affBtn:'쿠팡에서 베스트셀러 책 보기',
+    disclosure:'이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.',
+    consentEEA:'OnlyOne은 방문 통계를 위해 쿠키(Google Analytics)를 사용해요. 동의하시면 서비스 개선에 큰 힘이 됩니다.',
+    consentSoft:'더 나은 서비스를 위해 방문 통계 쿠키(Google Analytics)를 사용해요.',
+    accept:'동의', decline:'거절', okBtn:'확인',
+    tiers:[
+      {min:10, e:'👑', t:'명예 총장', m:'만점! 대학 홍보대사 하셔도 됩니다. 친구들에게 도전장을 던져보세요.'},
+      {min:9,  e:'🧑‍🏫', t:'교수님', m:'거의 완벽! 강단에 서셔도 되겠어요.'},
+      {min:7,  e:'🏅', t:'장학생', m:'대학 상식 상위권! 다음엔 만점 노려봐요.'},
+      {min:5,  e:'📚', t:'성실한 재학생', m:'평타 이상! 몇 개만 더 알면 장학생.'},
+      {min:3,  e:'🐣', t:'설레는 신입생', m:'이제 캠퍼스 입문! 한 판 더 돌면 금방 늘어요.'},
+      {min:0,  e:'⏳', t:'입학 대기자', m:'괜찮아요, 재수는 필수 코스… 다시 도전!'}
+    ]
+  },
+  en:{
+    title:'Campus <em>IQ</em>', sub:"Which US university is the oldest? Where did Emma Watson study? Check your campus knowledge in 10 quick questions.",
+    b1:'🎓 10 questions', b2:'⏱ 1 minute', b3:'🏆 Share card',
+    start:'Start the Quiz', best:'My best score: ', bestNone:'Waiting for your first try 👀',
+    count:(i,n)=>`Question ${i} / ${n}`, score:s=>`Score ${s}`,
+    tagMC:'Multiple choice', tagOX:'True / False',
+    next:'Next', finish:'See results', pass:'Correct', fail:'Wrong',
+    ox:['True','False'],
+    resScore:(s,n)=>`<b>${s}</b> out of ${n} correct`,
+    share:'Share my card', retry:'Try again',
+    shareTitle:'Campus IQ', shareText:s=>`My Campus IQ result: ${s}/10 🎓`,
+    copied:'Card saved / copied!',
+    aff:'Feeling inspired to hit the books? 📚', affBtn:'Browse bestselling books on Amazon',
+    disclosure:'As an Amazon Associate, we earn from qualifying purchases.',
+    consentEEA:'OnlyOne uses cookies (Google Analytics) for visit statistics. Your consent helps us improve.',
+    consentSoft:'We use analytics cookies (Google Analytics) to improve this service.',
+    accept:'Accept', decline:'Decline', okBtn:'OK',
+    tiers:[
+      {min:10, e:'👑', t:'Honorary Chancellor', m:'Perfect score! Challenge your friends to beat this.'},
+      {min:9,  e:'🧑‍🏫', t:'Professor', m:'Almost flawless. You could teach this.'},
+      {min:7,  e:'🏅', t:"Dean's List", m:'Top of the class! One more run for a perfect score?'},
+      {min:5,  e:'📚', t:'Solid Sophomore', m:'Better than average. A few more facts and you make the Dean’s List.'},
+      {min:3,  e:'🐣', t:'Fresh Freshman', m:'Welcome to campus! Another round and you’ll level up fast.'},
+      {min:0,  e:'⏳', t:'Waitlisted', m:'No worries — reapply immediately!'}
+    ]
+  }
+};
+
+/* ---------------- questions ----------------
+   t:'mc' → c:[보기4개], a:정답 index
+   t:'ox' → a:true(O)/false(X)
+   f: 정답 후 보여줄 한 줄 상식(선택) */
+const Q_KO = [
+  {t:'mc', q:'피겨여왕 김연아가 졸업한 대학은?', c:['고려대학교','연세대학교','서울대학교','한양대학교'], a:0, f:'김연아는 고려대학교 체육교육과 출신입니다.'},
+  {t:'mc', q:'귀여운 마스코트 ‘넙죽이’로 유명한 대학은?', c:['KAIST','포스텍','UNIST','서울대학교'], a:0, f:'넙죽이는 KAIST 공식 마스코트로 굿즈도 인기입니다.'},
+  {t:'mc', q:'인하대학교 이름의 유래는?', c:['인천 + 하와이','인천 + 하남','설립자의 호','인의예지 + 하늘'], a:0, f:'하와이 교민 성금으로 세워져 인천의 仁, 하와이의 荷를 땄습니다.'},
+  {t:'mc', q:'성균관대학교가 뿌리로 삼는 성균관이 세워진 해는?', c:['1398년','1885년','1905년','1946년'], a:0, f:'조선 태조 7년(1398년)에 세워진 성균관이 기원입니다.'},
+  {t:'mc', q:'연세대학교의 상징 동물은?', c:['독수리','호랑이','사자','황소'], a:0},
+  {t:'mc', q:'고려대학교의 상징 동물은?', c:['호랑이','독수리','용','곰'], a:0},
+  {t:'mc', q:'서울대학교 정문 조형물이 나타내는 글자는?', c:['샤','서','대','솔'], a:0, f:'‘국립서울대학교’의 자음을 형상화해 ‘샤’처럼 보입니다.'},
+  {t:'mc', q:'캠퍼스 안에 호수 ‘일감호’가 있는 대학은?', c:['건국대학교','경희대학교','중앙대학교','국민대학교'], a:0, f:'일감호는 서울 시내 대학의 명물 호수입니다.'},
+  {t:'mc', q:'포스텍(POSTECH)이 있는 도시는?', c:['포항','울산','대구','창원'], a:0, f:'1986년 포스코가 설립한 연구중심대학입니다.'},
+  {t:'mc', q:'KAIST 본원이 있는 도시는?', c:['대전','서울','대구','세종'], a:0},
+  {t:'mc', q:'한국 최초의 여성 고등교육기관에서 출발한 대학은?', c:['이화여자대학교','숙명여자대학교','성신여자대학교','동덕여자대학교'], a:0, f:'1886년 세워진 이화학당이 시작입니다.'},
+  {t:'mc', q:'예수회가 설립한 대학은?', c:['서강대학교','연세대학교','한양대학교','숭실대학교'], a:0, f:'서강대의 상징은 알바트로스입니다.'},
+  {t:'mc', q:'봉준호 감독이 졸업한 대학은?', c:['연세대학교','고려대학교','중앙대학교','한국예술종합학교'], a:0, f:'연세대 사회학과 출신입니다.'},
+  {t:'mc', q:'노벨문학상 수상 작가 한강이 졸업한 대학은?', c:['연세대학교','서울대학교','이화여자대학교','고려대학교'], a:0, f:'연세대 국어국문학과 출신입니다.'},
+  {t:'mc', q:'반기문 전 UN 사무총장의 학부 모교는?', c:['서울대학교','고려대학교','연세대학교','성균관대학교'], a:0, f:'서울대 외교학과 출신입니다.'},
+  {t:'mc', q:'불교 종단이 세운 대학은?', c:['동국대학교','서강대학교','숭실대학교','한신대학교'], a:0, f:'동국대의 상징은 코끼리입니다.'},
+  {t:'mc', q:'UNIST(울산과학기술원)가 있는 도시는?', c:['울산','포항','부산','경주'], a:0},
+  {t:'mc', q:'GIST(광주과학기술원)가 있는 도시는?', c:['광주','대전','전주','대구'], a:0},
+  {t:'mc', q:'한양대학교의 상징 동물은?', c:['사자','호랑이','독수리','말'], a:0},
+  {t:'mc', q:'건국대학교의 상징 동물은?', c:['황소','사자','독수리','거북이'], a:0},
+  {t:'mc', q:'‘청룡’을 상징으로 쓰는 대학은?', c:['중앙대학교','경희대학교','한국외국어대학교','단국대학교'], a:0},
+  {t:'mc', q:'홍익대학교가 특히 유명한 분야는?', c:['미술·디자인','의학','법학','해양학'], a:0},
+  {t:'mc', q:'경북대학교가 있는 도시는?', c:['대구','경주','포항','안동'], a:0},
+  {t:'mc', q:'전남대학교 본교가 있는 도시는?', c:['광주','목포','여수','순천'], a:0},
+  {t:'mc', q:'경희대학교 서울캠퍼스의 상징적인 건물은?', c:['평화의 전당','일감호','63빌딩','백양로'], a:0, f:'유럽 성처럼 생긴 평화의 전당은 공연장으로도 유명합니다.'},
+  {t:'mc', q:'고려대학교의 전신은?', c:['보성전문학교','연희전문학교','이화학당','숭실학당'], a:0, f:'1905년 세워진 보성전문학교가 전신입니다.'},
+  {t:'mc', q:'연세대학교의 뿌리가 된 한국 최초의 서양식 병원은?', c:['광혜원','자혜의원','대한의원','동인의원'], a:0, f:'1885년 광혜원(제중원)이 세브란스병원으로 이어졌습니다.'},
+  {t:'mc', q:'서울대학교 관악캠퍼스가 있는 자치구는?', c:['관악구','동작구','서초구','금천구'], a:0},
+  {t:'mc', q:'아주대학교가 있는 도시는?', c:['수원','성남','안양','용인'], a:0},
+  {t:'mc', q:'한국외국어대학교가 특히 유명한 분야는?', c:['외국어·통번역','공학','의학','체육'], a:0},
+  {t:'mc', q:'충남대학교가 있는 도시는?', c:['대전','천안','공주','청주'], a:0, f:'이름은 충남이지만 캠퍼스는 대전에 있습니다.'},
+  {t:'mc', q:'DGIST(대구경북과학기술원)가 있는 도시는?', c:['대구','구미','경산','포항'], a:0},
+  {t:'mc', q:'‘고연전(연고전)’은 어느 두 대학의 정기전일까요?', c:['고려대 vs 연세대','고려대 vs 성균관대','연세대 vs 서강대','고려대 vs 한양대'], a:0, f:'매년 가을 5개 종목에서 맞붙는 최대 라이벌전입니다.'},
+  {t:'mc', q:'다음 중 서울에 있지 않은 대학은?', c:['포스텍','경희대학교','한양대학교','중앙대학교'], a:0, f:'포스텍은 경북 포항에 있습니다.'},
+  {t:'mc', q:'부산대학교 본교가 있는 곳은?', c:['부산 금정구','부산 해운대구','부산 사하구','부산 남구'], a:0},
+  {t:'ox', q:'서울대학교는 국립대학이다.', a:true},
+  {t:'ox', q:'KAIST 본원은 서울에 있다.', a:false, f:'본원은 대전 유성구에 있습니다.'},
+  {t:'ox', q:'이화여자대학교는 남녀공학이다.', a:false},
+  {t:'ox', q:'포스텍은 포스코가 설립했다.', a:true},
+  {t:'ox', q:'세브란스병원은 연세대학교 의료원 소속이다.', a:true},
+  {t:'ox', q:'서강대학교는 여자대학이다.', a:false},
+  {t:'ox', q:'숙명여자대학교는 여자대학이다.', a:true},
+  {t:'ox', q:'제주대학교는 국립대학이다.', a:true},
+  {t:'ox', q:'홍익대학교 정문 앞 번화가를 ‘홍대 앞’이라고 부른다.', a:true},
+  {t:'ox', q:'성균관대학교의 뿌리는 조선시대 성균관이다.', a:true},
+  /* 미국 대학 보너스 10문제 */
+  {t:'mc', q:'🇺🇸 미국에서 가장 오래된 대학은?', c:['하버드','예일','프린스턴','스탠퍼드'], a:0, f:'1636년에 세워졌습니다.'},
+  {t:'mc', q:'🇺🇸 마크 저커버그가 페이스북을 만들 당시 다니던 대학은?', c:['하버드','스탠퍼드','MIT','예일'], a:0, f:'창업 후 자퇴했다가 2017년 명예 졸업장을 받았습니다.'},
+  {t:'mc', q:'🇺🇸 실리콘밸리 탄생과 가장 관련 깊은 대학은?', c:['스탠퍼드','UC버클리','칼텍','하버드'], a:0, f:'구글 창업자들도 스탠퍼드에서 만났습니다.'},
+  {t:'mc', q:'🇺🇸 MIT가 있는 도시는?', c:['케임브리지','보스턴','뉴욕','시카고'], a:0, f:'보스턴 바로 옆 케임브리지, 하버드와 같은 도시입니다.'},
+  {t:'mc', q:'🇺🇸 아이비리그에 속한 대학은 모두 몇 개?', c:['8개','6개','10개','12개'], a:0},
+  {t:'mc', q:'🇺🇸 배우 엠마 왓슨이 졸업한 대학은?', c:['브라운','하버드','예일','컬럼비아'], a:0},
+  {t:'mc', q:'🇺🇸 아마존 창업자 제프 베이조스의 모교는?', c:['프린스턴','하버드','MIT','스탠퍼드'], a:0},
+  {t:'ox', q:'🇺🇸 스탠퍼드는 아이비리그 소속이다.', a:false, f:'아이비리그는 미 동부 8개 사립대 연맹입니다.'},
+  {t:'ox', q:'🇺🇸 UC 버클리는 사립대학이다.', a:false, f:'캘리포니아 주립대학(UC) 시스템의 공립대학입니다.'},
+  {t:'ox', q:'🇺🇸 미시간대 풋볼 경기장 ‘빅 하우스’는 미국 최대 규모의 대학 경기장이다.', a:true, f:'수용 인원이 10만 7천 명이 넘습니다.'}
+];
+
+const Q_EN = [
+  {t:'mc', q:'Which is the oldest university in the United States?', c:['Harvard','Yale','Princeton','Stanford'], a:0, f:'Harvard was founded in 1636.'},
+  {t:'mc', q:'Where is Yale University located?', c:['New Haven, CT','Boston, MA','New York, NY','Providence, RI'], a:0},
+  {t:'mc', q:'Which university did Mark Zuckerberg attend when he started Facebook?', c:['Harvard','Stanford','MIT','Yale'], a:0, f:'He dropped out and received an honorary degree in 2017.'},
+  {t:'mc', q:"What is MIT's mascot?", c:['A beaver','A bulldog','A tiger','An eagle'], a:0, f:'Tim the Beaver — “nature’s engineer.”'},
+  {t:'mc', q:'Which of these is NOT in the Ivy League?', c:['Stanford','Brown','Cornell','Dartmouth'], a:0},
+  {t:'mc', q:'How many schools are in the Ivy League?', c:['8','6','10','12'], a:0},
+  {t:'mc', q:'Where is Duke University?', c:['Durham, NC','Atlanta, GA','Nashville, TN','Charlottesville, VA'], a:0},
+  {t:'mc', q:"What are UCLA's athletic teams called?", c:['Bruins','Trojans','Golden Bears','Ducks'], a:0, f:'USC has the Trojans; Berkeley has the Golden Bears.'},
+  {t:'mc', q:'Which university was founded by Benjamin Franklin?', c:['University of Pennsylvania','Harvard','Princeton','Columbia'], a:0},
+  {t:'mc', q:'The University of Notre Dame is in which state?', c:['Indiana','Ohio','Illinois','Michigan'], a:0},
+  {t:'mc', q:'Georgetown University is located in…', c:['Washington, D.C.','Boston','Philadelphia','Baltimore'], a:0},
+  {t:'mc', q:'Caltech is located in which city?', c:['Pasadena','San Diego','San Jose','Sacramento'], a:0},
+  {t:'mc', q:'Cornell University is in which city?', c:['Ithaca, NY','Albany, NY','Buffalo, NY','Syracuse, NY'], a:0},
+  {t:'mc', q:'“The Big House,” the largest college football stadium in the US, belongs to…', c:['University of Michigan','Ohio State','Texas A&M','Penn State'], a:0, f:'Michigan Stadium holds over 107,000 fans.'},
+  {t:'mc', q:'Emma Watson graduated from which university?', c:['Brown','Harvard','Yale','Columbia'], a:0},
+  {t:'mc', q:'Jeff Bezos graduated from which university?', c:['Princeton','Harvard','MIT','Stanford'], a:0},
+  {t:'mc', q:'Larry Page and Sergey Brin met at which university before founding Google?', c:['Stanford','UC Berkeley','MIT','Caltech'], a:0, f:'They met in the PhD program at Stanford.'},
+  {t:'mc', q:'Where did Barack Obama complete his undergraduate degree?', c:['Columbia','Harvard','Yale','Princeton'], a:0, f:'He later attended Harvard Law School.'},
+  {t:'mc', q:"What is Harvard's motto?", c:['Veritas','Lux et Veritas','In God We Trust','Fiat Lux'], a:0, f:'Veritas is Latin for “truth.” Lux et Veritas is Yale’s.'},
+  {t:'mc', q:'Which of these is a public university?', c:['UC Berkeley','USC','NYU','Duke'], a:0},
+  {t:'mc', q:'The Juilliard School is world-famous for…', c:['Performing arts','Medicine','Law','Engineering'], a:0},
+  {t:'mc', q:'West Point is the academy of which US military branch?', c:['Army','Navy','Air Force','Marines'], a:0, f:'The Naval Academy is in Annapolis; the Air Force Academy is in Colorado.'},
+  {t:'mc', q:'Students of Texas A&M are famously called…', c:['Aggies','Longhorns','Sooners','Tigers'], a:0},
+  {t:'mc', q:"What is Ohio State's mascot?", c:['Brutus Buckeye','Sparty','Bucky Badger','Goldy Gopher'], a:0},
+  {t:'mc', q:'Northwestern University is located in…', c:['Evanston, IL','Chicago, IL','Madison, WI','Detroit, MI'], a:0},
+  {t:'mc', q:'Johns Hopkins University is in which city?', c:['Baltimore','Washington, D.C.','Philadelphia','Richmond'], a:0},
+  {t:'mc', q:'Carnegie Mellon University is in which city?', c:['Pittsburgh','Philadelphia','Cleveland','Detroit'], a:0},
+  {t:'mc', q:'Dartmouth College is in which state?', c:['New Hampshire','Vermont','Maine','Massachusetts'], a:0},
+  {t:'mc', q:'Brown University is in which city?', c:['Providence, RI','Boston, MA','New Haven, CT','Hartford, CT'], a:0},
+  {t:'mc', q:"Yale's beloved live mascot is a…", c:['Bulldog','Tiger','Bear','Eagle'], a:0, f:'His name is Handsome Dan.'},
+  {t:'mc', q:"What are Princeton's athletic teams called?", c:['Tigers','Lions','Bears','Eagles'], a:0},
+  {t:'mc', q:'RISD (Rhode Island School of Design) is famous for…', c:['Art & design','Business','Medicine','Agriculture'], a:0},
+  {t:'mc', q:'Michelle Obama completed her undergraduate degree at…', c:['Princeton','Harvard','Columbia','Georgetown'], a:0, f:'She then attended Harvard Law School.'},
+  {t:'mc', q:'Natalie Portman graduated from which university?', c:['Harvard','Yale','Stanford','Brown'], a:0, f:'She studied psychology while acting.'},
+  {t:'mc', q:'Elon Musk earned his bachelor’s degrees from…', c:['University of Pennsylvania','Stanford','MIT','Caltech'], a:0, f:'Degrees in physics and economics (Wharton).'},
+  {t:'mc', q:"UT Austin's athletic teams are the…", c:['Longhorns','Aggies','Cowboys','Red Raiders'], a:0},
+  {t:'mc', q:"Penn State's athletic teams are the…", c:['Nittany Lions','Wolverines','Badgers','Hoosiers'], a:0},
+  {t:'mc', q:'Vanderbilt University is located in…', c:['Nashville, TN','Memphis, TN','Atlanta, GA','Louisville, KY'], a:0},
+  {t:'mc', q:'Stanford University was founded by a magnate of which industry?', c:['Railroads','Oil','Steel','Banking'], a:0, f:'Leland Stanford, a railroad tycoon, founded it in memory of his son.'},
+  {t:'mc', q:'The University of Chicago is especially renowned for producing many laureates of which prize?', c:['Nobel Prize in Economics','Pulitzer Prize','Fields Medal only','Grammy Awards'], a:0},
+  {t:'ox', q:'Harvard’s main campus is located in Boston proper.', a:false, f:'It’s in Cambridge, across the Charles River from Boston.'},
+  {t:'ox', q:'MIT is a member of the Ivy League.', a:false, f:'The Ivy League is 8 schools — MIT isn’t one of them.'},
+  {t:'ox', q:'NYU has a traditional gated campus.', a:false, f:'NYU’s buildings are woven into Greenwich Village.'},
+  {t:'ox', q:'UC Berkeley is a public university.', a:true},
+  {t:'ox', q:'Columbia University is in New York City.', a:true},
+  {t:'ox', q:'Bill Gates graduated from Harvard.', a:false, f:'He dropped out to build Microsoft — honorary degree in 2007.'},
+  {t:'ox', q:'The University of Chicago is in Illinois.', a:true},
+  {t:'ox', q:'Stanford’s campus spans more than 8,000 acres, one of the largest in the US.', a:true},
+  {t:'ox', q:'Duke’s athletic teams are the Blue Devils.', a:true},
+  {t:'ox', q:'Rice University is in Houston, Texas.', a:true}
+];
+
+/* ---------------- state ---------------- */
+let lang = localStorage.getItem('oo_lang') || (navigator.language && navigator.language.startsWith('ko') ? 'ko' : 'en');
+let deck = [], idx = 0, score = 0, locked = false;
+const $ = id => document.getElementById(id);
+const T = () => I18N[lang];
+
+/* ---------------- utils ---------------- */
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+function ga(name, params){ if(typeof gtag==='function') gtag('event', name, params||{}); }
+
+/* ---------------- pennants (hero deco) ---------------- */
+(function(){
+  const colors=['#B5342E','#3D4248','#C9A227','#2E7D53','#8A9097'];
+  const box=$('pennants'); let html='';
+  for(let i=0;i<12;i++){
+    html+=`<span class="pennant" style="left:${3+i*8.2}%;border-top:20px solid ${colors[i%colors.length]};opacity:.85"></span>`;
+  }
+  box.innerHTML=html;
+})();
+
+/* ---------------- i18n render ---------------- */
+function renderStatic(){
+  const t=T();
+  document.documentElement.lang = lang;
+  $('langBtn').textContent = lang==='ko' ? 'EN' : '한국어';
+  $('tTitle').innerHTML = t.title;
+  $('tSub').textContent = t.sub;
+  $('tB1').textContent=t.b1; $('tB2').textContent=t.b2; $('tB3').textContent=t.b3;
+  $('btnStart').textContent = t.start;
+  const best = localStorage.getItem('oo_univ_best_'+lang);
+  $('tBest').innerHTML = best!==null ? t.best+`<b>${best} / ${ROUND}</b>` : t.bestNone;
+  $('btnNext').textContent = t.next;
+  $('btnShare').textContent = t.share;
+  $('btnRetry').textContent = t.retry;
+  /* affiliate */
+  $('affText').textContent = t.aff;
+  const link = $('affLink');
+  link.textContent = t.affBtn;
+  link.href = lang==='ko' ? COUPANG_URL : AMAZON_URL;
+  $('affDisclosure').textContent = t.disclosure;
+  const noLink = (lang==='ko' && COUPANG_URL==='COUPANG_URL') || (lang==='en' && AMAZON_URL==='AMAZON_URL');
+  $('affBox').style.display = noLink ? 'none' : 'block';
+}
+
+$('langBtn').addEventListener('click', ()=>{
+  lang = lang==='ko' ? 'en' : 'ko';
+  localStorage.setItem('oo_lang', lang);
+  renderStatic(); renderConsentText();
+  show('scrHome');
+  ga('language_change',{language:lang});
+});
+
+/* ---------------- screens ---------------- */
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
+  $(id).classList.add('on');
+  window.scrollTo({top:0});
+}
+
+/* ---------------- quiz flow ---------------- */
+$('btnStart').addEventListener('click', startQuiz);
+$('btnRetry').addEventListener('click', startQuiz);
+$('btnNext').addEventListener('click', nextQ);
+
+function startQuiz(){
+  deck = shuffle(lang==='ko' ? Q_KO : Q_EN).slice(0, ROUND);
+  idx = 0; score = 0;
+  show('scrQuiz'); renderQ();
+  ga('quiz_start',{language:lang});
+}
+
+function renderQ(){
+  const t=T(), q=deck[idx];
+  locked=false;
+  $('qCount').textContent = t.count(idx+1, ROUND);
+  $('qScore').textContent = t.score(score);
+  $('gaugeBar').style.width = (idx/ROUND*100)+'%';
+  $('qTag').textContent = q.t==='ox' ? t.tagOX : t.tagMC;
+  $('qText').textContent = q.q;
+  $('qFact').className='fact'; $('qFact').textContent='';
+  $('btnNext').className='btn-next';
+  $('btnNext').textContent = idx===ROUND-1 ? t.finish : t.next;
+  const st=$('stamp'); st.className='stamp'; st.textContent='';
+
+  const box=$('choices'); box.innerHTML='';
+  if(q.t==='ox'){
+    box.className='choices ox';
+    t.ox.forEach((label,i)=>{
+      const b=document.createElement('button');
+      b.className='choice'; b.textContent=label;
+      b.addEventListener('click', ()=>answer(i===0, b, q));
+      box.appendChild(b);
+    });
+  }else{
+    box.className='choices';
+    const order = shuffle(q.c.map((_,i)=>i));
+    order.forEach(ci=>{
+      const b=document.createElement('button');
+      b.className='choice'; b.textContent=q.c[ci]; b.dataset.ci=ci;
+      b.addEventListener('click', ()=>answer(ci===q.a, b, q));
+      box.appendChild(b);
+    });
+  }
+}
+
+function answer(userVal, btn, q){
+  if(locked) return; locked=true;
+  const t=T();
+  const correct = q.t==='ox' ? (userVal===q.a) : userVal;
+  document.querySelectorAll('.choice').forEach(b=>{
+    b.disabled=true;
+    if(q.t==='ox'){
+      const isO = b.textContent===t.ox[0];
+      if(isO===q.a) b.classList.add('correct');
+    }else if(Number(b.dataset.ci)===q.a){
+      b.classList.add('correct');
+    }
+  });
+  if(!correct) btn.classList.add('wrong');
+  if(correct) score++;
+  $('qScore').textContent = t.score(score);
+
+  const st=$('stamp');
+  st.textContent = correct ? t.pass : t.fail;
+  st.className = 'stamp show ' + (correct?'pass':'fail');
+
+  if(q.f){ $('qFact').textContent='💡 '+q.f; $('qFact').classList.add('show'); }
+  $('btnNext').classList.add('show');
+}
+
+function nextQ(){
+  idx++;
+  if(idx>=ROUND){ showResult(); } else { renderQ(); }
+}
+
+/* ---------------- result ---------------- */
+function tierOf(s){ return T().tiers.find(t=>s>=t.min); }
+
+function showResult(){
+  const t=T(), tier=tierOf(score);
+  $('gaugeBar').style.width='100%';
+  $('resEmoji').textContent = tier.e;
+  $('resTier').textContent = tier.t;
+  $('resScore').innerHTML = t.resScore(score, ROUND);
+  $('resMsg').textContent = tier.m;
+  $('cardPreview').style.display='none'; $('cardPreview').innerHTML='';
+  const key='oo_univ_best_'+lang;
+  const prev=localStorage.getItem(key);
+  if(prev===null || score>Number(prev)) localStorage.setItem(key, score);
+  show('scrResult');
+  drawCard(tier);
+  ga('quiz_complete',{language:lang, score:score, tier:tier.t});
+}
+
+/* ---------------- share card ---------------- */
+function drawCard(tier){
+  const cv=$('shareCanvas'), x=cv.getContext('2d'), W=1080, H=1080;
+  x.fillStyle='#FAFAF8'; x.fillRect(0,0,W,H);
+  /* pennant garland */
+  const cols=['#B5342E','#3D4248','#C9A227','#2E7D53','#8A9097'];
+  for(let i=0;i<12;i++){
+    const px=60+i*82;
+    x.fillStyle=cols[i%cols.length];
+    x.beginPath(); x.moveTo(px,0); x.lineTo(px+52,0); x.lineTo(px+26,68); x.closePath(); x.fill();
+  }
+  /* logo mark */
+  x.strokeStyle='#3D4248'; x.lineWidth=16; x.lineCap='round';
+  x.beginPath(); x.arc(W/2,208,44,0,Math.PI*2); x.stroke();
+  x.beginPath(); x.moveTo(W/2,252+8); x.lineTo(W/2,308); x.stroke();
+  x.fillStyle='#3D4248'; x.textAlign='center';
+  x.font='700 40px Pretendard, sans-serif';
+  x.fillText('OnlyOne', W/2, 372);
+
+  x.font='600 44px Pretendard, sans-serif'; x.fillStyle='#8A9097';
+  x.fillText(lang==='ko'?'대학잘알 테스트':'Campus IQ', W/2, 460);
+
+  x.font='140px sans-serif';
+  x.fillText(tier.e, W/2, 620);
+
+  x.fillStyle='#3D4248'; x.font='800 84px Pretendard, sans-serif';
+  x.fillText(tier.t, W/2, 740);
+
+  x.fillStyle='#B5342E'; x.font='800 64px Pretendard, sans-serif';
+  x.fillText(score+' / '+ROUND, W/2, 830);
+
+  x.fillStyle='#8A9097'; x.font='500 34px Pretendard, sans-serif';
+  x.fillText(HUB_URL, W/2, 980);
+  x.strokeStyle='#E8E7E2'; x.lineWidth=2;
+  x.beginPath(); x.moveTo(120,920); x.lineTo(W-120,920); x.stroke();
+}
+
+$('btnShare').addEventListener('click', async ()=>{
+  const t=T(), cv=$('shareCanvas');
+  ga('share_click',{language:lang, score:score});
+  cv.toBlob(async blob=>{
+    const file=new File([blob], 'campus-iq.png', {type:'image/png'});
+    if(navigator.canShare && navigator.canShare({files:[file]})){
+      try{
+        await navigator.share({files:[file], title:t.shareTitle, text:t.shareText(score)});
+        return;
+      }catch(e){ if(e && e.name==='AbortError') return; }
+    }
+    /* fallback: clipboard → download */
+    try{
+      if(navigator.clipboard && window.ClipboardItem){
+        await navigator.clipboard.write([new ClipboardItem({'image/png':blob})]);
+      }
+    }catch(e){}
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob); a.download='campus-iq.png'; a.click();
+    URL.revokeObjectURL(a.href);
+    /* show preview so users can long-press save on mobile */
+    const img=new Image(); img.src=cv.toDataURL('image/png');
+    const pv=$('cardPreview'); pv.innerHTML=''; pv.appendChild(img); pv.style.display='block';
+  }, 'image/png');
+});
+
+/* ---------------- consent (GA4 Consent Mode v2) ---------------- */
+function isEEA(){
+  try{
+    const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'';
+    return tz.startsWith('Europe/');
+  }catch(e){ return false; }
+}
+function grantAnalytics(){
+  gtag('consent','update',{analytics_storage:'granted'});
+}
+function renderConsentText(){
+  const t=T(), eea=isEEA();
+  $('consentText').textContent = eea ? t.consentEEA : t.consentSoft;
+  $('cAccept').textContent = eea ? t.accept : t.okBtn;
+  $('cDecline').textContent = t.decline;
+  $('cDecline').style.display = eea ? '' : 'none';
+}
+(function initConsent(){
+  const saved=localStorage.getItem('oo_consent');
+  if(saved==='granted'){ grantAnalytics(); return; }
+  if(saved==='denied' && isEEA()) return;
+  if(!isEEA() && saved==='seen'){ grantAnalytics(); return; }
+  renderConsentText();
+  $('consentBox').classList.add('on');
+  $('cAccept').addEventListener('click', ()=>{
+    localStorage.setItem('oo_consent', isEEA()?'granted':'seen');
+    grantAnalytics();
+    $('consentBox').classList.remove('on');
+  });
+  $('cDecline').addEventListener('click', ()=>{
+    localStorage.setItem('oo_consent','denied');
+    $('consentBox').classList.remove('on');
+  });
+})();
+
+/* ---------------- init ---------------- */
+renderStatic();
+</script>
+</body>
+</html>
